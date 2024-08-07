@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@bazel/runfiles':
+        specifier: ^5
+        version: 5.0.0
       '@buf/bazel_bazel.bufbuild_es':
         specifier: 2.0.0-20240806194025-8f5cf9629ba6.1
         version: 2.0.0-20240806194025-8f5cf9629ba6.1(@bufbuild/protobuf@2.0.0)
@@ -30,12 +33,6 @@ importers:
       handlebars:
         specifier: ^4
         version: 4.0.0
-      highlight.js:
-        specifier: ^11
-        version: 11.0.0
-      marked:
-        specifier: ^10
-        version: 10.0.0
       prettier:
         specifier: ^3
         version: 3.2.5
@@ -47,6 +44,10 @@ importers:
         version: 7.0.0(eslint@9.3.0)(typescript@5.4.5)
 
 packages:
+
+  /@bazel/runfiles@5.0.0:
+    resolution: {integrity: sha512-5LhgThr/vt8Ny8SvuW3yMhDrKLVhQkOwOqnzPSCh03YBZTPYYjc1/LOxl2UOWkhqyEgp9fU5MjzgSOIWLtXbqQ==}
+    dev: false
 
   /@buf/bazel_bazel.bufbuild_es@2.0.0-20240806194025-8f5cf9629ba6.1(@bufbuild/protobuf@2.0.0):
     resolution: {registry: https://buf.build/gen/npm/v1/, tarball: https://buf.build/gen/npm/v1/@buf/bazel_bazel.bufbuild_es/-/bazel_bazel.bufbuild_es-2.0.0-20240806194025-8f5cf9629ba6.1.tgz}
@@ -807,11 +808,6 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /highlight.js@11.0.0:
-    resolution: {integrity: sha512-ByaTMfsSuoqerTwemOgpIhfULEIaK52JJYhky/sK7/Yqc0+t7Uh5DHay9vIC94YXSupnQ1Vqfc9VXrYP4eXW3Q==}
-    engines: {node: '>=12.0.0'}
-    dev: true
-
   /ignore@5.3.1:
     resolution: {integrity: sha512-5Fytz/IraMjqpwfd34ke28PTVMjZjJG2MPn5t7OE4eUCUNf8BAa7b5WUS9/Qvr6mwOQS7Mk6vdsMno5he+T8Xw==}
     engines: {node: '>= 4'}
@@ -898,12 +894,6 @@ packages:
 
   /lodash.merge@4.6.2:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
-    dev: true
-
-  /marked@10.0.0:
-    resolution: {integrity: sha512-YiGcYcWj50YrwBgNzFoYhQ1hT6GmQbFG8SksnYJX1z4BXTHSOrz1GB5/Jm2yQvMg4nN1FHP4M6r03R10KrVUiA==}
-    engines: {node: '>= 18'}
-    hasBin: true
     dev: true
 
   /merge2@1.4.1:

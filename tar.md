@@ -62,6 +62,18 @@ Rules
 Create an mtree specification to map a directory hierarchy. See https://man.freebsd.org/cgi/man.cgi?mtree(8)
 
 
+Example usage (generated):
+
+```python
+load("@some-ruleset-name//lib:tar.bzl", "mtree_spec")
+
+mtree_spec(
+    # A unique name for this target.
+    name = "",
+)
+```
+
+
 ### name
 
 Required <a href="https://bazel.build/docs/build-ref.html#name">name</a>.
@@ -95,6 +107,20 @@ Resulting specification file to write
 ## tar_rule
 
 Rule that executes BSD `tar`. Most users should use the [`tar`](#tar) macro, rather than load this directly.
+
+
+Example usage (generated):
+
+```python
+load("@some-ruleset-name//lib:tar.bzl", "tar_rule")
+
+tar_rule(
+    # A unique name for this target.
+    name = "",
+    # An mtree specification file
+    mtree = "",
+)
+```
 
 
 ### name
@@ -191,6 +217,18 @@ Compress the archive file with a supported algorithm.
 
 
 
+
+Example usage (generated):
+
+```python
+load("@some-ruleset-name//lib:tar.bzl", "tar_lib")
+
+tar_lib.common.add_compression_args(
+    compress = None,
+    args = [],
+)
+```
+
  
 
 ### compress
@@ -217,6 +255,17 @@ Required.
 
 
 
+
+Example usage (generated):
+
+```python
+load("@some-ruleset-name//lib:tar.bzl", "tar_lib")
+
+tar_lib.implementation(
+    ctx = None,
+)
+```
+
  
 
 ### ctx
@@ -232,6 +281,17 @@ Required.
 ## tar_lib.mtree_implementation
 
 
+
+
+Example usage (generated):
+
+```python
+load("@some-ruleset-name//lib:tar.bzl", "tar_lib")
+
+tar_lib.mtree_implementation(
+    ctx = None,
+)
+```
 
  
 
@@ -273,6 +333,18 @@ https://man.freebsd.org/cgi/man.cgi?mtree(8)
 
 3. `mtree` may be a label of a file containing the specification lines.
 
+
+
+Example usage (generated):
+
+```python
+load("@some-ruleset-name//lib:tar.bzl", "tar")
+
+tar(
+    # name of resulting `tar_rule`
+    name = "",
+)
+```
 
  
 
@@ -321,6 +393,20 @@ additional named parameters to pass to `tar_rule`
 ## mtree_mutate
 
 Modify metadata in an mtree file.
+
+
+Example usage (generated):
+
+```python
+load("@some-ruleset-name//lib:tar.bzl", "mtree_mutate")
+
+mtree_mutate(
+    # name of the target, output will be `[name].mtree`.
+    name = "",
+    # input mtree file, typically created by `mtree_spec`.
+    mtree = None,
+)
+```
 
  
 

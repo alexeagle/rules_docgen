@@ -23,9 +23,7 @@ load("{{loadTgt}}", "{{../ruleName}}")
 {{../ruleName}}(
     {{#each ../attribute}}
     {{#if this.mandatory}}
-    {{#with this.docString as |doc|}}
-    # {{firstLine doc}}
-    {{/with}}
+    # {{firstLine this.docString}}
     {{this.name}} = {{placeholder this.type}},
     {{/if}}
     {{/each}}

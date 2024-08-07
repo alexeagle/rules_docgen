@@ -1,22 +1,14 @@
 import Handlebars from 'handlebars';
-import hljs from 'highlight.js';
-import {marked} from 'marked';
-import { readUtf, write } from './fs.js';
+import { readUtf } from './fs.mjs';
 import {AttributeType} from '@buf/bazel_bazel.bufbuild_es/src/main/java/com/google/devtools/build/skydoc/rendering/proto/stardoc_output_pb.js'
+import {runfiles} from '@bazel/runfiles';
+
 /**
  * Side effects to make handlebars work.
  * See https://handlebarsjs.com/api-reference/
  * @returns compiled templates for rendering, and render helpers
  */
 export function setupHandlebars() {
-    // Marked is the markdown -> HTML converter, with syntax highlighting supplied by highlight.js
-    marked.setOptions({
-        highlight: function (code, lang) {
-            const language = hljs.getLanguage(lang) ? lang : 'plaintext';
-            return hljs.highlight(code, { language }).value;
-        },
-    } as any);
-
     Handlebars.registerHelper('markdown', function (this: any, options) {
         return new Handlebars.SafeString(Handlebars.marked(options.fn(this)));
     });
@@ -210,11 +202,54 @@ export function setupHandlebars() {
             return attributeTypeDescription(attributeType);
         }
     );
+
+    /**
+     * rendering helper
+     * @param attributeType the starlark type
+     * @returns the default value for that type
+     */
+    function attributeTypePlaceholder(attributeType: number): string {
+        switch (AttributeType[attributeType]) {
+            case 'INT':
+                return '0';
+            case 'NAME':
+            case 'LABEL':
+            case 'STRING':
+            case 'OUTPUT':
+                return '""';
+            case 'STRING_LIST':
+            case 'INT_LIST':
+            case 'LABEL_LIST':
+            case 'OUTPUT_LIST':
+                return '[]';
+            case 'BOOLEAN':
+                return 'false';
+            case 'LABEL_STRING_DICT':
+            case 'STRING_DICT':
+            case 'STRING_LIST_DICT':
+                return '{}';
+            case 'UNKNOWN':
+            case 'UNRECOGNIZED':
+                throw new Error('unknown attribute type ' + attributeType);
+        }
+        throw new Error('unknown attribute type ' + attributeType);
+    }
+
+    Handlebars.registerHelper('placeholder', function (attributeType: number) {
+        return new Handlebars.SafeString(
+            attributeTypePlaceholder(attributeType)
+        );
+    });
+
     /**
      * Return object: all the compiled templates, ready to render with a data object
      */
     const templates = {
-        module: Handlebars.compile(readUtf('docgen/starlark/templates/module.md')),
+        module: Handlebars.compile(readUtf(
+            '/Users/alexeagle/Projects/try_buf/docgen/starlark/templates/module.md',
+            // FIXME
+            // runfiles.resolveWorkspaceRelative('docgen/starlark/templates/module.md')
+        )),
     };
 
     return { templates };

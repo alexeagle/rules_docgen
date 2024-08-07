@@ -1,0 +1,14 @@
+load("@aspect_bazel_lib//lib:write_source_files.bzl", "write_source_file")
+load("//docgen/starlark:defs.bzl", "starlark_doc")
+
+starlark_doc(
+    name = "defs",
+    src = "defs.bzl",
+    out = "_defs.md",
+)
+
+write_source_file(
+    name = "update",
+    in_file = "defs",
+    out_file = "defs.md",
+)
