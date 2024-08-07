@@ -1,0 +1,5 @@
+filegroup(
+    name = "templates",
+    srcs = ["module.md"],
+    visibility = ["//docgen/starlark:__pkg__"],
+)

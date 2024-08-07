@@ -1,0 +1,21 @@
+{
+  "name": "try-buf",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@buf/bazel_bazel.bufbuild_es": "2.0.0-20240806194025-8f5cf9629ba6.1",
+    "@bufbuild/protobuf": "^2"
+  },
+  "devDependencies": {
+    "@bufbuild/protoc-gen-es": "^1",
+    "@eslint/js": "^9",
+    "@types/node": "^22.1.0",
+    "eslint": "^9",
+    "handlebars": "^4",
+    "highlight.js": "^11",
+    "marked": "^10",
+    "prettier": "^3",
+    "typescript": "5.4.5",
+    "typescript-eslint": "^7"
+  }
+}

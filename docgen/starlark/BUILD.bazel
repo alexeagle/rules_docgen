@@ -1,0 +1,27 @@
+load("@aspect_rules_js//js:defs.bzl", "js_binary")
+load("@aspect_rules_ts//ts:defs.bzl", "ts_project")
+
+ts_project(
+    name = "starlark",
+    srcs = [
+        "fs.ts",
+        "handlebars.ts",
+        "index.ts",
+    ],
+    data = ["//docgen/starlark/templates"],
+    source_map = True,
+    deps = [
+        "//:node_modules/@buf/bazel_bazel.bufbuild_es",
+        "//:node_modules/@bufbuild/protobuf",
+        "//:node_modules/@types/node",
+        "//:node_modules/handlebars",
+        "//:node_modules/highlight.js",
+        "//:node_modules/marked",
+    ],
+)
+
+js_binary(
+    name = "render",
+    data = [":starlark"],
+    entry_point = "index.js",
+)
