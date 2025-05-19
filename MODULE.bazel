@@ -1,3 +1,5 @@
+module(name = "rules_docgen", version = "0.0.0")
+
 bazel_dep(name = "aspect_bazel_lib", version = "2.14.0")
 bazel_dep(name = "rules_proto", version = "6.0.0.bcr.1")
 bazel_dep(name = "toolchains_protoc", version = "0.3.1")
